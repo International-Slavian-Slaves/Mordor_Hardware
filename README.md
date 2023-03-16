@@ -1,2 +1,2 @@
-# Slavic_Hardware
-Hardware backend repo
+# 🛠️ Slavic_Hardware 🛠️
+⚙️ Hardware backend repo ⚙️
