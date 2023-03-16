@@ -2,17 +2,16 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
-
-const char* ssid = "SSID сети";
-const char* password = "Пароль";
-const char* serverName = "Адрес по которому будет отправлен запрос";
+const char* ssid = "Gorcomnet_plus";
+const char* password = "91929394";
+const char* serverName = "http://192.168.0.247:5000/test";
 
 unsigned long lastTime = 0;
-unsigned long timerDelay = 30000;
+unsigned long timerDelay = 10000;
 
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   WiFi.begin(ssid, password);
   Serial.println("Connecting to WiFi");
   while(WiFi.status() != WL_CONNECTED) {
@@ -21,7 +20,7 @@ void setup() {
   }
   Serial.println("Connected to WiFi network with IP Address: ");
   Serial.println(WiFi.localIP());
-  Serial.println("Timer set to 30 seconds");
+  Serial.println("Timer set to 10 seconds");
 }
 
 void loop() {
@@ -31,8 +30,8 @@ void loop() {
       HTTPClient http;
       http.begin(client, serverName);
       http.addHeader("Content-Type", "text/plain");
-      //String httpRequestData = "test";
-      int httpResponseCode = http.POST("RFID");
+      String httpRequestData = "payload";
+      int httpResponseCode = http.POST(httpRequestData);
       Serial.print("HTTP Response code: ");
       Serial.println(httpResponseCode);
       http.end();
