@@ -1,2 +1,2 @@
-# 🛠️ Slavic_Hardware 🛠️
+# 🛠️ Mordor_Hardware 🛠️
 ⚙️ Hardware backend repo ⚙️
