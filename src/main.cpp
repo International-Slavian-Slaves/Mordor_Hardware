@@ -4,10 +4,11 @@
 #include <WiFiClient.h>
 const char* ssid = "Gorcomnet_plus";
 const char* password = "91929394";
-const char* serverName = "http://192.168.0.247:5000/test";
-
+//const char* serverName = "http://192.168.0.247:5000/test";
+#define DEBUG
 unsigned long lastTime = 0;
 unsigned long timerDelay = 10000;
+String id = "None";
 
 
 void setup() {
@@ -28,13 +29,26 @@ void loop() {
     if(WiFi.status()== WL_CONNECTED){
       WiFiClient client;
       HTTPClient http;
-      http.begin(client, serverName);
-      http.addHeader("Content-Type", "text/plain");
-      String httpRequestData = "payload";
-      int httpResponseCode = http.POST(httpRequestData);
-      Serial.print("HTTP Response code: ");
-      Serial.println(httpResponseCode);
+      String payload = "{}";
+      String getServerName = "http://192.168.0.247:5000/test-get?rfid=" + id; 
+      http.begin(client, getServerName);
+      int httpResponseCode = http.GET();
+      if (httpResponseCode>0) {
+        #ifdef DEBUG
+        Serial.print("HTTP Response code: ");
+        Serial.println(httpResponseCode);
+        #endif
+        payload = http.getString();
+        #ifdef DEBUG
+        Serial.println(payload);
+        #endif
+    }
+      else {
+        Serial.print("Error code: ");
+        Serial.println(httpResponseCode);
+      }
       http.end();
+      Serial.println ("payload");
     }
     else {
       Serial.println("WiFi Disconnected");
