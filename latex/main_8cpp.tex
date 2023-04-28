@@ -1,0 +1,167 @@
+\hypertarget{main_8cpp}{}\doxysection{main.\+cpp File Reference}
+\label{main_8cpp}\index{main.cpp@{main.cpp}}
+
+
+\mbox{\hyperlink{main_8cpp}{main.\+cpp}} file for esp8266 firmware for Mordor project  
+
+
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$ESP8266\+Wi\+Fi.\+h$>$}\newline
+{\ttfamily \#include $<$ESP8266\+HTTPClient.\+h$>$}\newline
+{\ttfamily \#include $<$Wi\+Fi\+Client.\+h$>$}\newline
+{\ttfamily \#include $<$Wire.\+h$>$}\newline
+{\ttfamily \#include $<$Nfc\+Adapter.\+h$>$}\newline
+{\ttfamily \#include $<$PN532.\+h$>$}\newline
+{\ttfamily \#include $<$PN532\+\_\+\+I2\+C.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+PN532\+\_\+\+I2C \mbox{\hyperlink{main_8cpp_a2cf67d5e05b509a53e5fd9dac3f3e958}{pn532\+\_\+i2c}} (Wire)
+\begin{DoxyCompactList}\small\item\em initial neccessary declarations \end{DoxyCompactList}\item 
+boolean \mbox{\hyperlink{main_8cpp_ac61c1e961ff8d631827f0dd5fc1aafd3}{read\+NFC}} ()
+\begin{DoxyCompactList}\small\item\em read NFC tag if present near reader \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{main_8cpp_ae926ffd87339706d09ac34d0347d7313}{http\+Get}} (String id)
+\begin{DoxyCompactList}\small\item\em Send HTTP GET request with NFC tag number and get response. \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{main_8cpp_a9d11218f035759e194b87a209a9ede39}{tag\+To\+String}} (byte id\mbox{[}4\mbox{]})
+\begin{DoxyCompactList}\small\item\em Convert NFC tag to String format for convinience. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\begin{DoxyCompactList}\small\item\em Initial setup for esp8266, pn532 reader, WI-\/\+FI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\begin{DoxyCompactList}\small\item\em main loop for esp8266 to run\+: -\/Read NFC tag; -\/If tag not read print debug info and wait -\/If tag present send a GET request and check payload \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{main_8cpp_a587ba0cb07f02913598610049a3bbb79}{ssid}} = \char`\"{}Gorcomnet\+\_\+plus\char`\"{}
+\begin{DoxyCompactList}\small\item\em wifi and host ip setup \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{main_8cpp_aa4a2ebcb494493f648ae1e6975672575}\label{main_8cpp_aa4a2ebcb494493f648ae1e6975672575}} 
+const char $\ast$ {\bfseries password} = \char`\"{}91929394\char`\"{}
+\item 
+\mbox{\Hypertarget{main_8cpp_a0a591674279c4e2e0369b79df9faa22c}\label{main_8cpp_a0a591674279c4e2e0369b79df9faa22c}} 
+const String {\bfseries post\+Server\+Name} = \char`\"{}80.\+90.\+186.\+118/mordorhw\char`\"{}
+\item 
+\mbox{\Hypertarget{main_8cpp_a07a50bd2e3ba97f6e1ab7b3a23ab4e57}\label{main_8cpp_a07a50bd2e3ba97f6e1ab7b3a23ab4e57}} 
+Nfc\+Adapter {\bfseries nfc} = Nfc\+Adapter(\mbox{\hyperlink{main_8cpp_a2cf67d5e05b509a53e5fd9dac3f3e958}{pn532\+\_\+i2c}})
+\item 
+\mbox{\Hypertarget{main_8cpp_ab40c73c2d8e0c564b45edd7ee9248603}\label{main_8cpp_ab40c73c2d8e0c564b45edd7ee9248603}} 
+String {\bfseries tag\+Id} = \char`\"{}None\char`\"{}
+\item 
+\mbox{\Hypertarget{main_8cpp_a997799ddc21e61ddbd5726d0c5f522b0}\label{main_8cpp_a997799ddc21e61ddbd5726d0c5f522b0}} 
+String {\bfseries disp\+Tag} = \char`\"{}None\char`\"{}
+\item 
+\mbox{\Hypertarget{main_8cpp_ada6aa8891fe06b207999dfca899ae810}\label{main_8cpp_ada6aa8891fe06b207999dfca899ae810}} 
+byte {\bfseries nuid\+PICC} \mbox{[}4\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{main_8cpp}{main.\+cpp}} file for esp8266 firmware for Mordor project 
+
+\begin{DoxyAuthor}{Author}
+Vladislav Kuznetsov of Slavian-\/\+Slaves team (\href{mailto:kuznetsovv.e.video@gmail.com}{\texttt{ kuznetsovv.\+e.\+video@gmail.\+com}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+2 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2023-\/03-\/20
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2023 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_ae926ffd87339706d09ac34d0347d7313}\label{main_8cpp_ae926ffd87339706d09ac34d0347d7313}} 
+\index{main.cpp@{main.cpp}!httpGet@{httpGet}}
+\index{httpGet@{httpGet}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{httpGet()}{httpGet()}}
+{\footnotesize\ttfamily String http\+Get (\begin{DoxyParamCaption}\item[{String}]{id }\end{DoxyParamCaption})}
+
+
+
+Send HTTP GET request with NFC tag number and get response. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & NFC tag id in String format \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+payload\+: response payload from server 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_afe461d27b9c48d5921c00d521181f12f}\label{main_8cpp_afe461d27b9c48d5921c00d521181f12f}} 
+\index{main.cpp@{main.cpp}!loop@{loop}}
+\index{loop@{loop}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+main loop for esp8266 to run\+: -\/Read NFC tag; -\/If tag not read print debug info and wait -\/If tag present send a GET request and check payload 
+
+\mbox{\Hypertarget{main_8cpp_a2cf67d5e05b509a53e5fd9dac3f3e958}\label{main_8cpp_a2cf67d5e05b509a53e5fd9dac3f3e958}} 
+\index{main.cpp@{main.cpp}!pn532\_i2c@{pn532\_i2c}}
+\index{pn532\_i2c@{pn532\_i2c}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{pn532\_i2c()}{pn532\_i2c()}}
+{\footnotesize\ttfamily PN532\+\_\+\+I2C pn532\+\_\+i2c (\begin{DoxyParamCaption}\item[{Wire}]{ }\end{DoxyParamCaption})}
+
+
+
+initial neccessary declarations 
+
+\mbox{\Hypertarget{main_8cpp_ac61c1e961ff8d631827f0dd5fc1aafd3}\label{main_8cpp_ac61c1e961ff8d631827f0dd5fc1aafd3}} 
+\index{main.cpp@{main.cpp}!readNFC@{readNFC}}
+\index{readNFC@{readNFC}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{readNFC()}{readNFC()}}
+{\footnotesize\ttfamily boolean read\+NFC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+read NFC tag if present near reader 
+
+\begin{DoxyReturn}{Returns}
+true\+: tag read and got payload 
+
+false\+: tag was not read 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}\label{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}} 
+\index{main.cpp@{main.cpp}!setup@{setup}}
+\index{setup@{setup}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initial setup for esp8266, pn532 reader, WI-\/\+FI. 
+
+\mbox{\Hypertarget{main_8cpp_a9d11218f035759e194b87a209a9ede39}\label{main_8cpp_a9d11218f035759e194b87a209a9ede39}} 
+\index{main.cpp@{main.cpp}!tagToString@{tagToString}}
+\index{tagToString@{tagToString}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{tagToString()}{tagToString()}}
+{\footnotesize\ttfamily String tag\+To\+String (\begin{DoxyParamCaption}\item[{byte}]{id\mbox{[}4\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Convert NFC tag to String format for convinience. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & NFC tag ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tag\+Id\+: tag ID converted to String 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{main_8cpp_a587ba0cb07f02913598610049a3bbb79}\label{main_8cpp_a587ba0cb07f02913598610049a3bbb79}} 
+\index{main.cpp@{main.cpp}!ssid@{ssid}}
+\index{ssid@{ssid}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{ssid}{ssid}}
+{\footnotesize\ttfamily const char$\ast$ ssid = \char`\"{}Gorcomnet\+\_\+plus\char`\"{}}
+
+
+
+wifi and host ip setup 
+
